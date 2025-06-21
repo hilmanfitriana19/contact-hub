@@ -2,6 +2,8 @@
 
 Aplikasi web React untuk manajemen kontak dengan penyimpanan sederhana berbasis spreadsheet (localStorage).
 
+Konfigurasi alamat spreadsheet dapat diatur melalui berkas `.env`.
+
 ## Setup
 
 1. Install dependencies
@@ -10,13 +12,16 @@ Aplikasi web React untuk manajemen kontak dengan penyimpanan sederhana berbasis 
    npm install
    ```
 
-2. Jalankan server pengembangan
+2. Salin berkas `.env.example` menjadi `.env` kemudian sesuaikan nilai
+   `VITE_SPREADSHEET_URL`.
+
+3. Jalankan server pengembangan
 
    ```bash
    npm run dev
    ```
 
-3. Build aplikasi
+4. Build aplikasi
 
    ```bash
    npm run build

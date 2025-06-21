@@ -1,6 +1,8 @@
 import { Contact, ContactFormData } from '../types';
 
-const STORAGE_KEY = 'contacts_spreadsheet';
+// Key atau URL spreadsheet diambil dari environment
+const STORAGE_KEY =
+  (import.meta.env.VITE_SPREADSHEET_URL as string) || 'contacts_spreadsheet';
 
 const loadContacts = (): Contact[] => {
   const data = localStorage.getItem(STORAGE_KEY);
