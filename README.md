@@ -1,6 +1,6 @@
 # Contact Hub
 
-Aplikasi web React untuk manajemen kontak dengan integrasi Firebase.
+Aplikasi web React untuk manajemen kontak dengan penyimpanan sederhana berbasis spreadsheet (localStorage).
 
 ## Setup
 
@@ -10,15 +10,13 @@ Aplikasi web React untuk manajemen kontak dengan integrasi Firebase.
    npm install
    ```
 
-2. Salin `src/config/firebase.ts` dan isi konfigurasi Firebase Anda.
-
-3. Jalankan server pengembangan
+2. Jalankan server pengembangan
 
    ```bash
    npm run dev
    ```
 
-4. Build aplikasi
+3. Build aplikasi
 
    ```bash
    npm run build
@@ -26,7 +24,7 @@ Aplikasi web React untuk manajemen kontak dengan integrasi Firebase.
 
 ## Fitur
 
-- Menyimpan data kontak ke Firebase Firestore
+- Menyimpan data kontak ke dalam "spreadsheet" di browser menggunakan localStorage
 - Tampilan publik untuk pengguna biasa
 - Panel admin dengan login sederhana
 
