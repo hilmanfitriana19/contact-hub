@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Plus, Edit, Trash2, Users, Building2, UserCheck, UserX } from 'lucide-react';
+import { Plus, Users, Building2, UserCheck, UserX } from 'lucide-react';
 import { Contact, ContactFormData } from '../../types';
 import { ContactCard } from '../Common/ContactCard';
 import { ContactForm } from '../Common/ContactForm';

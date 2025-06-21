@@ -5,7 +5,7 @@ import { SubmissionForm } from './components/Public/SubmissionForm';
 import { AdminLogin } from './components/Admin/AdminLogin';
 import { AdminDashboard } from './components/Admin/AdminDashboard';
 import { contactService } from './services/contactService';
-import { Contact, ContactFormData, AppState } from './types';
+import { ContactFormData, AppState } from './types';
 
 const ADMIN_CODE = 'admin123';
 

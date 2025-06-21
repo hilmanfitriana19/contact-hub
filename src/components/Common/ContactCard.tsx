@@ -1,5 +1,5 @@
 import React from 'react';
-import { MessageCircle, Send, Building2, User, FileText, CheckCircle, XCircle, Edit, Trash2 } from 'lucide-react';
+import { MessageCircle, Send, Building2, FileText, CheckCircle, XCircle, Edit, Trash2 } from 'lucide-react';
 import { Contact } from '../../types';
 import { generateWhatsAppLink, generateTelegramLink, formatPhoneNumber } from '../../utils/messaging';
 
