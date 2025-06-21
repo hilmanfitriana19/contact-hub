@@ -15,13 +15,20 @@ Konfigurasi URL web app disimpan di berkas `.env`.
 2. Salin berkas `.env.example` menjadi `.env` kemudian sesuaikan nilai
    `VITE_SPREADSHEET_URL`.
 
-3. Jalankan server pengembangan
+3. Buat script Apps Script baru dari Google Spreadsheet Anda lalu
+   **Deploy > New deployment** sebagai *Web app* dengan akses
+   **Anyone**. Salin URL web app tersebut ke variabel `VITE_SPREADSHEET_URL`.
+
+4. Pastikan spreadsheet yang digunakan sudah memiliki header kolom sesuai
+   dengan properti pada `src/services/contactService.ts`.
+
+5. Jalankan server pengembangan
 
    ```bash
    npm run dev
    ```
 
-4. Build aplikasi
+6. Build aplikasi
 
    ```bash
    npm run build
