@@ -1,8 +1,8 @@
 # Contact Hub
 
-Aplikasi web React untuk manajemen kontak dengan penyimpanan sederhana berbasis spreadsheet (localStorage).
+Aplikasi web React untuk manajemen kontak dengan penyimpanan data di Google Spreadsheet melalui Web App (Google Apps Script).
 
-Konfigurasi alamat spreadsheet dapat diatur melalui berkas `.env`.
+Konfigurasi URL web app disimpan di berkas `.env`.
 
 ## Setup
 
@@ -29,7 +29,7 @@ Konfigurasi alamat spreadsheet dapat diatur melalui berkas `.env`.
 
 ## Fitur
 
-- Menyimpan data kontak ke dalam "spreadsheet" di browser menggunakan localStorage
+- Menyimpan data kontak ke Google Spreadsheet melalui Apps Script
 - Tampilan publik untuk pengguna biasa
 - Panel admin dengan login sederhana
 

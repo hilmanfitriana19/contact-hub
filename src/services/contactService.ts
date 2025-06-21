@@ -1,102 +1,94 @@
 import { Contact, ContactFormData } from '../types';
 
-// Key atau URL spreadsheet diambil dari environment
-const STORAGE_KEY =
-  (import.meta.env.VITE_SPREADSHEET_URL as string) || 'contacts_spreadsheet';
+// URL web app (Apps Script atau layanan sejenis) untuk mengakses Google Spreadsheet
+const BASE_URL = import.meta.env.VITE_SPREADSHEET_URL as string;
 
-const loadContacts = (): Contact[] => {
-  const data = localStorage.getItem(STORAGE_KEY);
-  if (!data) return [];
-  try {
-    const parsed = JSON.parse(data) as Contact[];
-    return parsed.map(c => ({
-      ...c,
-      createdAt: new Date(c.createdAt),
-      updatedAt: new Date(c.updatedAt)
-    }));
-  } catch {
-    return [];
+const parseContacts = (rows: Record<string, unknown>[]): Contact[] =>
+  rows.map(row => {
+    const r = row as Record<string, unknown> & {
+      createdAt: string;
+      updatedAt: string;
+    };
+    return {
+      ...(r as Omit<Contact, 'createdAt' | 'updatedAt'>),
+      createdAt: new Date(r.createdAt),
+      updatedAt: new Date(r.updatedAt)
+    } as Contact;
+  });
+
+const request = async (url: string, options?: RequestInit) => {
+  const res = await fetch(url, options);
+  if (!res.ok) {
+    throw new Error('Network request failed');
   }
-};
-
-const saveContacts = (contacts: Contact[]) => {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(contacts));
-  window.dispatchEvent(new Event('contacts-changed'));
+  return res.json();
 };
 
 export const contactService = {
-  // Get all contacts
+  // Mendapatkan seluruh kontak
   async getAllContacts(): Promise<Contact[]> {
     try {
-      const contacts = loadContacts();
-      return contacts.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
+      const data = await request(`${BASE_URL}?action=get`);
+      const contacts = Array.isArray(data) ? data : data.contacts;
+      return parseContacts(contacts).sort(
+        (a, b) => b.createdAt.getTime() - a.createdAt.getTime()
+      );
     } catch (error) {
       console.error('Error fetching contacts:', error);
       return [];
     }
   },
 
-  // Subscribe to real-time updates
+  // Subscribe menggunakan polling berkala
   subscribeToContacts(callback: (contacts: Contact[]) => void) {
-    const handler = () => {
-      const contacts = loadContacts().sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
-      callback(contacts);
+    let cancelled = false;
+    const fetchData = async () => {
+      const contacts = await this.getAllContacts();
+      if (!cancelled) callback(contacts);
     };
-    window.addEventListener('contacts-changed', handler);
-    window.addEventListener('storage', handler);
-    // initial call
-    handler();
+    fetchData();
+    const id = setInterval(fetchData, 5000);
     return () => {
-      window.removeEventListener('contacts-changed', handler);
-      window.removeEventListener('storage', handler);
+      cancelled = true;
+      clearInterval(id);
     };
   },
 
-  // Add new contact
+  // Menambahkan kontak baru
   async addContact(contactData: ContactFormData): Promise<string> {
     try {
-      const contacts = loadContacts();
-      const id = crypto.randomUUID();
-      const now = new Date();
-      contacts.push({
-        id,
-        ...contactData,
-        createdAt: now,
-        updatedAt: now
+      const response = await request(`${BASE_URL}?action=add`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(contactData)
       });
-      saveContacts(contacts);
-      return id;
+      return response.id as string;
     } catch (error) {
       console.error('Error adding contact:', error);
       throw error;
     }
   },
 
-  // Update contact
+  // Memperbarui kontak
   async updateContact(id: string, contactData: Partial<ContactFormData>): Promise<void> {
     try {
-      const contacts = loadContacts();
-      const index = contacts.findIndex(c => c.id === id);
-      if (index !== -1) {
-        contacts[index] = {
-          ...contacts[index],
-          ...contactData,
-          updatedAt: new Date()
-        };
-        saveContacts(contacts);
-      }
+      await request(`${BASE_URL}?action=update&id=${id}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(contactData)
+      });
     } catch (error) {
       console.error('Error updating contact:', error);
       throw error;
     }
   },
 
-  // Delete contact
+  // Menghapus kontak
   async deleteContact(id: string): Promise<void> {
     try {
-      let contacts = loadContacts();
-      contacts = contacts.filter(c => c.id !== id);
-      saveContacts(contacts);
+      await request(`${BASE_URL}?action=delete&id=${id}`, {
+        method: 'POST'
+      });
     } catch (error) {
       console.error('Error deleting contact:', error);
       throw error;
