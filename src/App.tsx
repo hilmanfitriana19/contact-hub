@@ -3,18 +3,14 @@ import { Header } from './components/Layout/Header';
 import { Footer } from './components/Layout/Footer';
 import { ContactList } from './components/Public/ContactList';
 import { SubmissionForm } from './components/Public/SubmissionForm';
-import { AdminLogin } from './components/Admin/AdminLogin';
 import { UserLogin } from './components/Public/UserLogin';
-import { AdminDashboard } from './components/Admin/AdminDashboard';
 import { contactService } from './services/contactService';
 import { ContactFormData, AppState } from './types';
 
-const ADMIN_CODE = (import.meta.env.VITE_ADMIN_CODE as string) || 'admin123';
 const USER_CODE = (import.meta.env.VITE_USER_CODE as string) || 'user123';
 
 function App() {
   const [state, setState] = useState<AppState>({
-    isAdmin: false,
     hasAccess: false,
     contacts: [],
     loading: false,
@@ -58,39 +54,14 @@ function App() {
   };
 
   useEffect(() => {
-    if (!state.hasAccess && !state.isAdmin) return;
+    if (!state.hasAccess ) return;
     if (hasFetched.current) return;
     hasFetched.current = true;
     fetchContacts();
-  }, [state.hasAccess, state.isAdmin]);
+  }, [state.hasAccess]);
 
-  const handleAdminLogin = (code: string): boolean => {
-    if (code === ADMIN_CODE) {
-      setState(prev => ({
-        ...prev,
-        isAdmin: true,
-        hasAccess: true,
-        currentView: 'admin'
-      }));
-      fetchContacts();
-      return true;
-    }
-    return false;
-  };
 
-  const handleAdminLogout = () => {
-    setState(prev => ({
-      ...prev,
-      isAdmin: false,
-      currentView: 'public'
-    }));
-  };
-
-  const handleViewChange = (view: 'public' | 'admin' | 'submit') => {
-    if (view === 'admin' && !state.isAdmin) {
-      setState(prev => ({ ...prev, currentView: 'admin' }));
-      return;
-    }
+  const handleViewChange = (view: 'public' | 'submit') => {
     setState(prev => ({ ...prev, currentView: view }));
   };
 
@@ -104,30 +75,11 @@ function App() {
     }
   };
 
-  const handleUpdateContact = async (id: string, data: ContactFormData) => {
-    try {
-      await contactService.updateContact(id, data);
-      await fetchContacts();
-    } catch (error) {
-      console.error('Error updating contact:', error);
-      throw error;
-    }
-  };
-
-  const handleDeleteContact = async (id: string) => {
-    try {
-      await contactService.deleteContact(id);
-      await fetchContacts();
-    } catch (error) {
-      console.error('Error deleting contact:', error);
-      throw error;
-    }
-  };
 
   const renderCurrentView = () => {
     switch (state.currentView) {
       case 'public':
-        if (!state.hasAccess && !state.isAdmin) {
+        if (!state.hasAccess) {
           return <UserLogin onLogin={handleUserLogin} />;
         }
         return (
@@ -138,7 +90,7 @@ function App() {
         );
 
       case 'submit':
-        if (!state.hasAccess && !state.isAdmin) {
+        if (!state.hasAccess) {
           return <UserLogin onLogin={handleUserLogin} />;
         }
         return (
@@ -147,22 +99,8 @@ function App() {
           />
         );
       
-      case 'admin':
-        if (!state.isAdmin) {
-          return <AdminLogin onLogin={handleAdminLogin} />;
-        }
-        return (
-          <AdminDashboard
-            contacts={state.contacts}
-            onAddContact={handleAddContact}
-            onUpdateContact={handleUpdateContact}
-            onDeleteContact={handleDeleteContact}
-            loading={state.loading}
-          />
-        );
-      
       default:
-        if (!state.hasAccess && !state.isAdmin) {
+        if (!state.hasAccess) {
           return <UserLogin onLogin={handleUserLogin} />;
         }
         return (
@@ -178,9 +116,7 @@ function App() {
     <div className="relative min-h-screen pb-24 bg-slate-100 dark:bg-gradient-to-b dark:from-blue-950 dark:to-blue-900 dark:text-gray-100">
       <Header
         currentView={state.currentView}
-        isAdmin={state.isAdmin}
         onViewChange={handleViewChange}
-        onAdminLogout={handleAdminLogout}
         darkMode={darkMode}
         onToggleDarkMode={() => setDarkMode(prev => !prev)}
       />

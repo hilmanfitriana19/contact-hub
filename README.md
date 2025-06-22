@@ -14,7 +14,7 @@ Konfigurasi URL web app disimpan di berkas `.env`.
    ```
 
 2. Salin berkas `.env.example` menjadi `.env` kemudian sesuaikan nilai
-   `VITE_SPREADSHEET_URL`, `VITE_ADMIN_CODE`, dan `VITE_USER_CODE` (kode akses pengguna).
+   `VITE_SPREADSHEET_URL` dan `VITE_USER_CODE` (kode akses pengguna).
 
 3. Buat script Apps Script baru dari Google Spreadsheet Anda lalu
    **Deploy > New deployment** sebagai *Web app* dengan akses
@@ -39,9 +39,8 @@ Konfigurasi URL web app disimpan di berkas `.env`.
 
 - Menyimpan data kontak ke Google Spreadsheet melalui Apps Script
 - Tampilan publik untuk pengguna biasa
-- Panel admin dengan login sederhana
 - Halaman login pengguna menggunakan kode akses
-- Kode admin dan kode akses diatur melalui berkas `.env`
+- Kode akses diatur melalui berkas `.env`
 - Data hanya diambil setelah kode dimasukkan, kemudian diperbarui saat ada perubahan
 - Status kontak tampil di sebelah kanan dengan penanda warna
 - Tombol WhatsApp dan Telegram memakai logo resmi

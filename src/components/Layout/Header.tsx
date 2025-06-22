@@ -1,20 +1,16 @@
 import React from 'react';
-import { Users, Shield, Plus, Home, Sun, Moon } from 'lucide-react';
+import { Users, Plus, Home, Sun, Moon } from 'lucide-react';
 
 interface HeaderProps {
-  currentView: 'public' | 'admin' | 'submit';
-  isAdmin: boolean;
-  onViewChange: (view: 'public' | 'admin' | 'submit') => void;
-  onAdminLogout: () => void;
+  currentView: 'public' | 'submit';
+  onViewChange: (view: 'public' | 'submit') => void;
   darkMode: boolean;
   onToggleDarkMode: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
   currentView,
-  isAdmin,
   onViewChange,
-  onAdminLogout,
   darkMode,
   onToggleDarkMode
 }) => {
@@ -40,35 +36,7 @@ export const Header: React.FC<HeaderProps> = ({
               <span>Beranda</span>
             </button>
             
-            {/* <button
-              onClick={() => onViewChange('submit')}
-              className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                currentView === 'submit'
-                  ? 'bg-teal-100 text-teal-700 dark:bg-teal-900/40 dark:text-teal-200'
-                  : 'text-gray-500 hover:text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-white dark:hover:bg-gray-700'
-              }`}
-            >
-              <Plus className="h-4 w-4" />
-              <span>Tambah Kontak</span>
-            </button>
-             */}
-            {isAdmin ? (
-              <div className="flex items-center space-x-2">
-                <button
-                  onClick={() => onViewChange('admin')}
-                  className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                    currentView === 'admin'
-                      ? 'bg-orange-100 text-orange-700 dark:bg-orange-900/40 dark:text-orange-200'
-                      : 'text-gray-500 hover:text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-white dark:hover:bg-gray-700'
-                  }`}
-                >
-                  <Shield className="h-4 w-4" />
-                  <span>Admin</span>
-                </button>
-                <button
-                  onClick={onAdminLogout}
-                  className="text-sm text-red-600 hover:text-red-800 font-medium"
-                >
+
                   Logout
                 </button>
               </div>
