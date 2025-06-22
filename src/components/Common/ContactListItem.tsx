@@ -50,7 +50,8 @@ export const ContactListItem: React.FC<ContactListItemProps> = ({
         </span>
         <button
           onClick={() =>
-            window.open(generateWhatsAppLink(contact.whatsapp), '_blank')
+
+            contact.whatsapp && contact.whatsapp.trim() !== '-' && window.open(generateWhatsAppLink(contact.whatsapp), '_blank')
           }
           className="p-1 text-green-600 hover:opacity-80"
           aria-label="WhatsApp"
@@ -59,7 +60,7 @@ export const ContactListItem: React.FC<ContactListItemProps> = ({
         </button>
         <button
           onClick={() =>
-            window.open(generateTelegramLink(contact.telegramId), '_blank')
+            contact.telegramId && contact.telegramId.trim() !== '-' && window.open(generateTelegramLink(contact.telegramId), '_blank')
           }
           className="p-1 text-blue-600 hover:opacity-80"
           aria-label="Telegram"

@@ -30,9 +30,7 @@ export const contactService = {
     try {
       const data = await request(`${BASE_URL}`);
       const contacts = Array.isArray(data) ? data : data.contacts;
-
-      console.log('Fetched contacts:', contacts);
-
+      
       return parseContacts(contacts).sort(
         (a, b) => b.createdAt.getTime() - a.createdAt.getTime()
       );

@@ -17,6 +17,9 @@ export const ContactCard: React.FC<ContactCardProps> = ({
   onDelete 
 }) => {
   const handleWhatsAppClick = () => {
+    if (!contact.whatsapp || contact.whatsapp.trim() === '-') {
+      return
+    }
     window.open(generateWhatsAppLink(contact.whatsapp), '_blank');
   };
 

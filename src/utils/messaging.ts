@@ -1,4 +1,9 @@
 export const generateWhatsAppLink = (phoneNumber: string): string => {
+  
+  if (!phoneNumber) {
+    return '-';
+  }
+  
   // Remove all non-digit characters
   const cleanNumber = phoneNumber.toString().replace(/\D/g, '');
   
@@ -21,6 +26,10 @@ export const generateTelegramLink = (telegramId: string): string => {
 export const formatPhoneNumber = (phoneNumber: string): string => {
   const cleaned = phoneNumber.toString().replace(/\D/g, '');
   
+  if (!cleaned) {
+    return '-';
+  }
+
   if (cleaned.startsWith('62')) {
     return `+${cleaned}`;
   } else if (cleaned.startsWith('0')) {
