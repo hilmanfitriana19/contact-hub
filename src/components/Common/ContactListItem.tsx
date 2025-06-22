@@ -21,7 +21,7 @@ export const ContactListItem: React.FC<ContactListItemProps> = ({
   onDelete
 }) => {
   return (
-    <li className="flex justify-between items-start py-4 px-4 sm:px-6 bg-white dark:bg-blue-800 rounded-md hover:bg-slate-100 dark:hover:bg-blue-700">
+    <li className="flex justify-between items-start py-4 px-4 sm:px-6 bg-white dark:bg-blue-700 rounded-md hover:bg-slate-100 dark:hover:bg-blue-600">
       <div>
         <p className="font-medium text-gray-900 dark:text-gray-100">{contact.name}</p>
         <p className="text-sm text-gray-600 dark:text-gray-300">{contact.organization}</p>
