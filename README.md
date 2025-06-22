@@ -41,4 +41,6 @@ Konfigurasi URL web app disimpan di berkas `.env`.
 - Tampilan publik untuk pengguna biasa
 - Panel admin dengan login sederhana
 - Data hanya diambil sekali saat aplikasi dimuat, kemudian diperbarui ketika ada perubahan
+- Status kontak tampil di sebelah kanan dengan penanda warna
+- Tombol WhatsApp dan Telegram memakai logo resmi
 

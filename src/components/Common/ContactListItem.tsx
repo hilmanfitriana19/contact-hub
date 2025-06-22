@@ -5,6 +5,7 @@ import {
   generateTelegramLink,
   formatPhoneNumber
 } from '../../utils/messaging';
+import { WhatsAppLogo, TelegramLogo } from './MessagingIcons';
 
 interface ContactListItemProps {
   contact: Contact;
@@ -33,17 +34,35 @@ export const ContactListItem: React.FC<ContactListItemProps> = ({
         )}
       </div>
       <div className="flex items-center space-x-2">
-        <button
-          onClick={() => window.open(generateWhatsAppLink(contact.whatsapp), '_blank')}
-          className="px-2 py-1 bg-green-600 text-white text-xs rounded"
+        <span
+          className={`flex items-center space-x-1 text-xs font-medium ${
+            contact.isActive ? 'text-green-600' : 'text-red-600'
+          }`}
         >
-          WA
+          <span
+            className={`w-2 h-2 rounded-full ${
+              contact.isActive ? 'bg-green-600' : 'bg-red-600'
+            }`}
+          ></span>
+          <span>{contact.isActive ? 'Aktif' : 'Nonaktif'}</span>
+        </span>
+        <button
+          onClick={() =>
+            window.open(generateWhatsAppLink(contact.whatsapp), '_blank')
+          }
+          className="p-1 text-green-600 hover:opacity-80"
+          aria-label="WhatsApp"
+        >
+          <WhatsAppLogo className="w-5 h-5" />
         </button>
         <button
-          onClick={() => window.open(generateTelegramLink(contact.telegramId), '_blank')}
-          className="px-2 py-1 bg-blue-600 text-white text-xs rounded"
+          onClick={() =>
+            window.open(generateTelegramLink(contact.telegramId), '_blank')
+          }
+          className="p-1 text-blue-600 hover:opacity-80"
+          aria-label="Telegram"
         >
-          TG
+          <TelegramLogo className="w-5 h-5" />
         </button>
         {showActions && (
           <>
