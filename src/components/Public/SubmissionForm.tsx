@@ -46,7 +46,7 @@ export const SubmissionForm: React.FC<SubmissionFormProps> = ({ onSubmit }) => {
       )}
 
       {/* Form */}
-      <div className="bg-white rounded-lg shadow-md p-6">
+      <div className="bg-slate-50 rounded-lg shadow-md p-6">
         <ContactForm
           onSubmit={handleSubmit}
           onCancel={handleCancel}

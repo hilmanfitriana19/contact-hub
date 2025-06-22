@@ -73,7 +73,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           </p>
         </div>
         
-        <div className="bg-white rounded-lg shadow-md p-6">
+        <div className="bg-slate-50 rounded-lg shadow-md p-6">
           <ContactForm
             contact={editingContact}
             onSubmit={handleFormSubmit}
@@ -104,7 +104,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
       {/* Stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="bg-white p-4 rounded-lg shadow-sm border">
+        <div className="bg-slate-50 p-4 rounded-lg shadow-sm border">
           <div className="flex items-center justify-between">
             <div>
               <div className="text-2xl font-bold text-gray-900">{stats.total}</div>
@@ -114,7 +114,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           </div>
         </div>
         
-        <div className="bg-white p-4 rounded-lg shadow-sm border">
+        <div className="bg-slate-50 p-4 rounded-lg shadow-sm border">
           <div className="flex items-center justify-between">
             <div>
               <div className="text-2xl font-bold text-green-600">{stats.active}</div>
@@ -124,7 +124,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           </div>
         </div>
         
-        <div className="bg-white p-4 rounded-lg shadow-sm border">
+        <div className="bg-slate-50 p-4 rounded-lg shadow-sm border">
           <div className="flex items-center justify-between">
             <div>
               <div className="text-2xl font-bold text-red-600">{stats.inactive}</div>
@@ -134,7 +134,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           </div>
         </div>
         
-        <div className="bg-white p-4 rounded-lg shadow-sm border">
+        <div className="bg-slate-50 p-4 rounded-lg shadow-sm border">
           <div className="flex items-center justify-between">
             <div>
               <div className="text-2xl font-bold text-purple-600">{stats.organizations}</div>
@@ -175,7 +175,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           </p>
         </div>
       ) : (
-        <ul className="bg-white divide-y divide-gray-200 rounded-md shadow">
+        <ul className="bg-slate-50 divide-y divide-gray-200 rounded-md shadow">
           {filteredContacts.map(contact => (
             <ContactListItem
               key={contact.id}

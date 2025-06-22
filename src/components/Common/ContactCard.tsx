@@ -25,7 +25,7 @@ export const ContactCard: React.FC<ContactCardProps> = ({
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-200 border border-gray-200 overflow-hidden">
+    <div className="bg-slate-50 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 border border-gray-200 overflow-hidden">
       <div className="p-6">
         <div className="flex items-start justify-between mb-4">
           <div className="flex-1">
