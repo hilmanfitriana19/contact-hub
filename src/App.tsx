@@ -29,6 +29,13 @@ function App() {
   const hasFetched = useRef(false);
 
   useEffect(() => {
+    const storedCode = localStorage.getItem('userCode');
+    if (storedCode && storedCode === USER_CODE) {
+      setState(prev => ({ ...prev, hasAccess: true }));
+    }
+  }, []);
+
+  useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add('dark');
       localStorage.setItem('theme', 'dark');
@@ -50,6 +57,7 @@ function App() {
 
   const handleUserLogin = (code: string): boolean => {
     if (code === USER_CODE) {
+      localStorage.setItem('userCode', code);
       setState(prev => ({ ...prev, hasAccess: true }));
       fetchContacts();
       return true;

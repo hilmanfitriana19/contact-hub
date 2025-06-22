@@ -42,6 +42,8 @@ Konfigurasi URL web app disimpan di berkas `.env`.
 - Panel admin dengan login sederhana
 - Halaman login pengguna menggunakan kode akses
 - Kode admin dan kode akses diatur melalui berkas `.env`
+- Kode akses pengguna disimpan di _local storage_ agar tetap masuk setelah
+  penyegaran halaman
 - Data hanya diambil setelah kode dimasukkan, kemudian diperbarui saat ada perubahan
 - Status kontak tampil di sebelah kanan dengan penanda warna
 - Tombol WhatsApp dan Telegram memakai logo resmi
