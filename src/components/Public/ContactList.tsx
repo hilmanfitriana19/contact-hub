@@ -50,8 +50,8 @@ export const ContactList: React.FC<ContactListProps> = ({ contacts, loading }) =
             Direktori Kontak
           </h2>
         </div>
-        <p className="text-gray-600">
-          Temukan dan hubungi rekan kerja dengan mudah
+        <p className="text-gray-600 dark:text-gray-300">
+          Temukan rekan kerja dan hubungi mereka dengan mudah
         </p>
       </div>
 
@@ -89,9 +89,9 @@ export const ContactList: React.FC<ContactListProps> = ({ contacts, loading }) =
             onChange={(e) => setShowNotesOnly(e.target.checked)}
             className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
           />
-          <label htmlFor="showNotesOnly" className="flex items-center space-x-1 text-sm text-gray-700">
+          <label htmlFor="showNotesOnly" className="flex items-center space-x-1 text-sm text-gray-700 dark:text-gray-300">
             <FileText className="h-4 w-4" />
-            <span>Ada Catatan</span>
+            <span>Dengan Catatan</span>
           </label>
         </div>
       </div>
@@ -116,7 +116,7 @@ export const ContactList: React.FC<ContactListProps> = ({ contacts, loading }) =
         </div>
         <div className="bg-purple-50 p-4 rounded-lg">
           <div className="text-2xl font-bold text-purple-600">{contactsWithNotes}</div>
-          <div className="text-sm text-purple-700">Ada Catatan</div>
+          <div className="text-sm text-purple-700 dark:text-purple-300">Kontak Dengan Catatan</div>
         </div>
       </div>
 
