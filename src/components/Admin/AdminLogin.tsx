@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { Shield, Lock } from 'lucide-react';
 
+const ADMIN_CODE = (import.meta.env.VITE_ADMIN_CODE as string) || 'admin123';
+const YEAR_CODE = (import.meta.env.VITE_YEAR_CODE as string) || new Date().getFullYear().toString();
+
 interface AdminLoginProps {
   onLogin: (code: string) => boolean;
 }
@@ -68,7 +71,10 @@ export const AdminLogin: React.FC<AdminLoginProps> = ({ onLogin }) => {
 
         <div className="mt-4 p-3 bg-gray-50 rounded-md">
           <p className="text-xs text-gray-600 text-center">
-            Demo: Gunakan kode <span className="font-mono font-bold">admin123</span>
+            Demo: Gunakan kode <span className="font-mono font-bold">{ADMIN_CODE}</span>
+          </p>
+          <p className="text-xs text-gray-600 text-center">
+            Kode Tahun: <span className="font-mono font-bold">{YEAR_CODE}</span>
           </p>
         </div>
       </div>
