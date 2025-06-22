@@ -45,5 +45,6 @@ Konfigurasi URL web app disimpan di berkas `.env`.
 - Data hanya diambil setelah kode dimasukkan, kemudian diperbarui saat ada perubahan
 - Status kontak tampil di sebelah kanan dengan penanda warna
 - Tombol WhatsApp dan Telegram memakai logo resmi
-- Mode gelap dengan tombol pengalih di header
+- Mode gelap dengan tombol pengalih di header dan nuansa biru gelap
+- Footer sederhana dengan informasi hak cipta dan kredit
 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Header } from './components/Layout/Header';
+import { Footer } from './components/Layout/Footer';
 import { ContactList } from './components/Public/ContactList';
 import { SubmissionForm } from './components/Public/SubmissionForm';
 import { AdminLogin } from './components/Admin/AdminLogin';
@@ -174,7 +175,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:text-gray-100">
+    <div className="min-h-screen bg-gray-50 dark:bg-slate-900 dark:text-gray-100">
       <Header
         currentView={state.currentView}
         isAdmin={state.isAdmin}
@@ -188,13 +189,7 @@ function App() {
         {renderCurrentView()}
       </main>
       
-      <footer className="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 mt-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="text-center text-gray-500 text-sm">
-            <p>&copy; {new Date().getFullYear()} ContactHub. Aplikasi Pencatatan Kontak & Relasi Kerja.</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
