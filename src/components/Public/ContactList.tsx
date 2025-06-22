@@ -130,7 +130,7 @@ export const ContactList: React.FC<ContactListProps> = ({ contacts, loading }) =
           </p>
         </div>
       ) : (
-        <ul className="bg-white dark:bg-blue-800 divide-y divide-gray-200 dark:divide-blue-700 rounded-md shadow">
+        <ul className="bg-white dark:bg-blue-900/60 divide-y divide-gray-200 dark:divide-blue-800 rounded-md shadow">
           {filteredContacts.map(contact => (
             <ContactListItem key={contact.id} contact={contact} />
           ))}

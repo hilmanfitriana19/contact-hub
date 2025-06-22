@@ -175,7 +175,7 @@ function App() {
   };
 
   return (
-    <div className="relative min-h-screen pb-24 bg-slate-100 dark:bg-blue-950 dark:text-gray-100">
+    <div className="relative min-h-screen pb-24 bg-slate-100 dark:bg-gradient-to-b dark:from-blue-950 dark:to-blue-900 dark:text-gray-100">
       <Header
         currentView={state.currentView}
         isAdmin={state.isAdmin}

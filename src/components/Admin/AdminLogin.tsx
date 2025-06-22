@@ -23,7 +23,7 @@ export const AdminLogin: React.FC<AdminLoginProps> = ({ onLogin }) => {
 
   return (
     <div className="max-w-md mx-auto mt-8">
-      <div className="bg-slate-50 dark:bg-slate-800 rounded-lg shadow-md p-6">
+      <div className="bg-slate-50 dark:bg-blue-900/60 rounded-lg shadow-md p-6">
         <div className="text-center mb-6">
           <div className="flex items-center justify-center space-x-2 mb-4">
             <Shield className="h-8 w-8 text-orange-600" />
@@ -51,7 +51,7 @@ export const AdminLogin: React.FC<AdminLoginProps> = ({ onLogin }) => {
                 }}
                 className={`w-full pl-10 pr-4 py-2 border rounded-md focus:ring-2 focus:ring-orange-500 focus:border-orange-500 ${
                   error ? 'border-red-500' : 'border-gray-300 dark:border-slate-600'
-                } bg-slate-50 dark:bg-slate-700 dark:text-gray-100`}
+                } bg-slate-50 dark:bg-blue-800/60 dark:text-gray-100`}
                 placeholder="Masukkan kode admin"
                 required
               />
@@ -69,7 +69,7 @@ export const AdminLogin: React.FC<AdminLoginProps> = ({ onLogin }) => {
           </button>
         </form>
 
-        <div className="mt-4 p-3 bg-gray-50 dark:bg-slate-700 rounded-md">
+        <div className="mt-4 p-3 bg-gray-50 dark:bg-blue-800/60 rounded-md">
           <p className="text-xs text-gray-600 dark:text-gray-400 text-center">
             Demo: Gunakan kode <span className="font-mono font-bold">{ADMIN_CODE}</span>
           </p>
