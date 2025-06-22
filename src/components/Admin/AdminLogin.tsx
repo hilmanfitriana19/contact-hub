@@ -68,15 +68,6 @@ export const AdminLogin: React.FC<AdminLoginProps> = ({ onLogin }) => {
             Masuk
           </button>
         </form>
-
-        <div className="mt-4 p-3 bg-gray-50 dark:bg-blue-800/60 rounded-md">
-          <p className="text-xs text-gray-600 dark:text-gray-400 text-center">
-            Demo: Gunakan kode <span className="font-mono font-bold">{ADMIN_CODE}</span>
-          </p>
-          <p className="text-xs text-gray-600 dark:text-gray-400 text-center">
-            Kode Akses: <span className="font-mono font-bold">{USER_CODE}</span>
-          </p>
-        </div>
       </div>
     </div>
   );

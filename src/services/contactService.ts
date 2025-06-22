@@ -45,7 +45,7 @@ export const contactService = {
   // Menambahkan kontak baru
   async addContact(contactData: ContactFormData): Promise<string> {
     try {
-      const response = await request(`${BASE_URL}?action=add`, {
+      const response = await request(`${BASE_URL}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(contactData)
