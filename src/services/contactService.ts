@@ -28,8 +28,11 @@ export const contactService = {
   // Mendapatkan seluruh kontak sekali panggil
   async getAllContacts(): Promise<Contact[]> {
     try {
-      const data = await request(`${BASE_URL}?action=get`);
+      const data = await request(`${BASE_URL}`);
       const contacts = Array.isArray(data) ? data : data.contacts;
+
+      console.log('Fetched contacts:', contacts);
+
       return parseContacts(contacts).sort(
         (a, b) => b.createdAt.getTime() - a.createdAt.getTime()
       );

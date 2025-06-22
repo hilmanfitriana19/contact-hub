@@ -1,6 +1,6 @@
 export const generateWhatsAppLink = (phoneNumber: string): string => {
   // Remove all non-digit characters
-  const cleanNumber = phoneNumber.replace(/\D/g, '');
+  const cleanNumber = phoneNumber.toString().replace(/\D/g, '');
   
   // Add country code if not present (assuming Indonesia +62)
   const formattedNumber = cleanNumber.startsWith('62') 
@@ -19,7 +19,7 @@ export const generateTelegramLink = (telegramId: string): string => {
 };
 
 export const formatPhoneNumber = (phoneNumber: string): string => {
-  const cleaned = phoneNumber.replace(/\D/g, '');
+  const cleaned = phoneNumber.toString().replace(/\D/g, '');
   
   if (cleaned.startsWith('62')) {
     return `+${cleaned}`;
