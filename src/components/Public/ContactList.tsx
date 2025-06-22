@@ -46,7 +46,9 @@ export const ContactList: React.FC<ContactListProps> = ({ contacts, loading }) =
       <div className="text-center mb-8">
         <div className="flex items-center justify-center space-x-2 mb-4">
           <Users className="h-8 w-8 text-blue-600" />
-          <h2 className="text-2xl font-bold text-gray-900">Direktori Kontak</h2>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+            Direktori Kontak
+          </h2>
         </div>
         <p className="text-gray-600">
           Temukan dan hubungi rekan kerja dengan mudah
@@ -130,7 +132,7 @@ export const ContactList: React.FC<ContactListProps> = ({ contacts, loading }) =
           </p>
         </div>
       ) : (
-        <ul className="bg-white dark:bg-blue-900/60 divide-y divide-gray-200 dark:divide-blue-800 rounded-md shadow">
+        <ul className="bg-white dark:bg-blue-800/70 divide-y divide-gray-200 dark:divide-blue-700 rounded-md shadow">
           {filteredContacts.map(contact => (
             <ContactListItem key={contact.id} contact={contact} />
           ))}
