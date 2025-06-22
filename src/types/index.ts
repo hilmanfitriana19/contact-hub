@@ -21,6 +21,7 @@ export interface ContactFormData {
 
 export interface AppState {
   isAdmin: boolean;
+  hasAccess: boolean;
   contacts: Contact[];
   loading: boolean;
   currentView: 'public' | 'admin' | 'submit';

@@ -3,6 +3,7 @@ import { Header } from './components/Layout/Header';
 import { ContactList } from './components/Public/ContactList';
 import { SubmissionForm } from './components/Public/SubmissionForm';
 import { AdminLogin } from './components/Admin/AdminLogin';
+import { UserLogin } from './components/Public/UserLogin';
 import { AdminDashboard } from './components/Admin/AdminDashboard';
 import { contactService } from './services/contactService';
 import { ContactFormData, AppState } from './types';
@@ -13,8 +14,9 @@ const YEAR_CODE = (import.meta.env.VITE_YEAR_CODE as string) || new Date().getFu
 function App() {
   const [state, setState] = useState<AppState>({
     isAdmin: false,
+    hasAccess: false,
     contacts: [],
-    loading: true,
+    loading: false,
     currentView: 'public'
   });
 
@@ -30,19 +32,31 @@ function App() {
     }));
   };
 
+  const handleUserLogin = (code: string): boolean => {
+    if (code === YEAR_CODE) {
+      setState(prev => ({ ...prev, hasAccess: true }));
+      fetchContacts();
+      return true;
+    }
+    return false;
+  };
+
   useEffect(() => {
+    if (!state.hasAccess && !state.isAdmin) return;
     if (hasFetched.current) return;
     hasFetched.current = true;
     fetchContacts();
-  }, []);
+  }, [state.hasAccess, state.isAdmin]);
 
   const handleAdminLogin = (code: string): boolean => {
     if (code === ADMIN_CODE) {
       setState(prev => ({
         ...prev,
         isAdmin: true,
+        hasAccess: true,
         currentView: 'admin'
       }));
+      fetchContacts();
       return true;
     }
     return false;
@@ -97,16 +111,22 @@ function App() {
   const renderCurrentView = () => {
     switch (state.currentView) {
       case 'public':
+        if (!state.hasAccess && !state.isAdmin) {
+          return <UserLogin onLogin={handleUserLogin} />;
+        }
         return (
-          <ContactList 
-            contacts={state.contacts} 
+          <ContactList
+            contacts={state.contacts}
             loading={state.loading}
           />
         );
-      
+
       case 'submit':
+        if (!state.hasAccess && !state.isAdmin) {
+          return <UserLogin onLogin={handleUserLogin} />;
+        }
         return (
-          <SubmissionForm 
+          <SubmissionForm
             onSubmit={handleAddContact}
           />
         );
@@ -126,9 +146,12 @@ function App() {
         );
       
       default:
+        if (!state.hasAccess && !state.isAdmin) {
+          return <UserLogin onLogin={handleUserLogin} />;
+        }
         return (
-          <ContactList 
-            contacts={state.contacts} 
+          <ContactList
+            contacts={state.contacts}
             loading={state.loading}
           />
         );
