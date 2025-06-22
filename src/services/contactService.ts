@@ -25,7 +25,7 @@ const request = async (url: string, options?: RequestInit) => {
 };
 
 export const contactService = {
-  // Mendapatkan seluruh kontak
+  // Mendapatkan seluruh kontak sekali panggil
   async getAllContacts(): Promise<Contact[]> {
     try {
       const data = await request(`${BASE_URL}?action=get`);
@@ -37,21 +37,6 @@ export const contactService = {
       console.error('Error fetching contacts:', error);
       return [];
     }
-  },
-
-  // Subscribe menggunakan polling berkala
-  subscribeToContacts(callback: (contacts: Contact[]) => void) {
-    let cancelled = false;
-    const fetchData = async () => {
-      const contacts = await this.getAllContacts();
-      if (!cancelled) callback(contacts);
-    };
-    fetchData();
-    const id = setInterval(fetchData, 5000);
-    return () => {
-      cancelled = true;
-      clearInterval(id);
-    };
   },
 
   // Menambahkan kontak baru

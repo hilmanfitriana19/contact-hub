@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Search, Filter, Users, FileText } from 'lucide-react';
 import { Contact } from '../../types';
-import { ContactCard } from '../Common/ContactCard';
+import { ContactListItem } from '../Common/ContactListItem';
 
 interface ContactListProps {
   contacts: Contact[];
@@ -118,23 +118,23 @@ export const ContactList: React.FC<ContactListProps> = ({ contacts, loading }) =
         </div>
       </div>
 
-      {/* Contact Grid */}
+      {/* Contact List */}
       {filteredContacts.length === 0 ? (
         <div className="text-center py-12">
           <Users className="h-12 w-12 text-gray-400 mx-auto mb-4" />
           <h3 className="text-lg font-medium text-gray-900 mb-2">Tidak ada kontak ditemukan</h3>
           <p className="text-gray-500">
-            {contacts.length === 0 
-              ? 'Belum ada kontak yang tersimpan.' 
+            {contacts.length === 0
+              ? 'Belum ada kontak yang tersimpan.'
               : 'Coba ubah kata kunci pencarian atau filter.'}
           </p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <ul className="bg-white divide-y divide-gray-200 rounded-md shadow">
           {filteredContacts.map(contact => (
-            <ContactCard key={contact.id} contact={contact} />
+            <ContactListItem key={contact.id} contact={contact} />
           ))}
-        </div>
+        </ul>
       )}
     </div>
   );

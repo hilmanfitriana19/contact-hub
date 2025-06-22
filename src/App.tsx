@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Header } from './components/Layout/Header';
 import { ContactList } from './components/Public/ContactList';
 import { SubmissionForm } from './components/Public/SubmissionForm';
@@ -17,17 +17,22 @@ function App() {
     currentView: 'public'
   });
 
-  useEffect(() => {
-    // Subscribe to real-time updates
-    const unsubscribe = contactService.subscribeToContacts((contacts) => {
-      setState(prev => ({
-        ...prev,
-        contacts,
-        loading: false
-      }));
-    });
+  const hasFetched = useRef(false);
 
-    return () => unsubscribe();
+  const fetchContacts = async () => {
+    setState(prev => ({ ...prev, loading: true }));
+    const contacts = await contactService.getAllContacts();
+    setState(prev => ({
+      ...prev,
+      contacts,
+      loading: false
+    }));
+  };
+
+  useEffect(() => {
+    if (hasFetched.current) return;
+    hasFetched.current = true;
+    fetchContacts();
   }, []);
 
   const handleAdminLogin = (code: string): boolean => {
@@ -61,6 +66,7 @@ function App() {
   const handleAddContact = async (data: ContactFormData) => {
     try {
       await contactService.addContact(data);
+      await fetchContacts();
     } catch (error) {
       console.error('Error adding contact:', error);
       throw error;
@@ -70,6 +76,7 @@ function App() {
   const handleUpdateContact = async (id: string, data: ContactFormData) => {
     try {
       await contactService.updateContact(id, data);
+      await fetchContacts();
     } catch (error) {
       console.error('Error updating contact:', error);
       throw error;
@@ -79,6 +86,7 @@ function App() {
   const handleDeleteContact = async (id: string) => {
     try {
       await contactService.deleteContact(id);
+      await fetchContacts();
     } catch (error) {
       console.error('Error deleting contact:', error);
       throw error;

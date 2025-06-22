@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Plus, Users, Building2, UserCheck, UserX } from 'lucide-react';
 import { Contact, ContactFormData } from '../../types';
-import { ContactCard } from '../Common/ContactCard';
+import { ContactListItem } from '../Common/ContactListItem';
 import { ContactForm } from '../Common/ContactForm';
 
 interface AdminDashboardProps {
@@ -175,9 +175,9 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           </p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <ul className="bg-white divide-y divide-gray-200 rounded-md shadow">
           {filteredContacts.map(contact => (
-            <ContactCard
+            <ContactListItem
               key={contact.id}
               contact={contact}
               showActions={true}
@@ -185,7 +185,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
               onDelete={handleDelete}
             />
           ))}
-        </div>
+        </ul>
       )}
     </div>
   );

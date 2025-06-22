@@ -1,6 +1,7 @@
 # Contact Hub
 
 Aplikasi web React untuk manajemen kontak dengan penyimpanan data di Google Spreadsheet melalui Web App (Google Apps Script).
+Kontak ditampilkan dalam bentuk daftar sederhana dan data diambil hanya sekali saat aplikasi dimuat.
 
 Konfigurasi URL web app disimpan di berkas `.env`.
 
@@ -39,4 +40,5 @@ Konfigurasi URL web app disimpan di berkas `.env`.
 - Menyimpan data kontak ke Google Spreadsheet melalui Apps Script
 - Tampilan publik untuk pengguna biasa
 - Panel admin dengan login sederhana
+- Data hanya diambil sekali saat aplikasi dimuat, kemudian diperbarui ketika ada perubahan
 
