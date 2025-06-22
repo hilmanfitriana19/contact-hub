@@ -25,7 +25,7 @@ export const ContactCard: React.FC<ContactCardProps> = ({
   };
 
   return (
-    <div className="bg-slate-50 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 border border-gray-200 overflow-hidden">
+    <div className="bg-white dark:bg-blue-900 border border-gray-200 dark:border-blue-700 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 overflow-hidden">
       <div className="p-6">
         <div className="flex items-start justify-between mb-4">
           <div className="flex-1">
@@ -33,9 +33,9 @@ export const ContactCard: React.FC<ContactCardProps> = ({
               <Building2 className="h-4 w-4 text-gray-500" />
               <span className="text-sm font-medium text-gray-600">{contact.organization}</span>
               <div className={`px-2 py-1 rounded-full text-xs font-medium ${
-                contact.isActive 
-                  ? 'bg-green-100 text-green-800' 
-                  : 'bg-red-100 text-red-800'
+                contact.isActive
+                  ? 'bg-green-100 dark:bg-green-700 dark:text-white text-green-800'
+                  : 'bg-red-100 dark:bg-red-700 dark:text-white text-red-800'
               }`}>
                 {contact.isActive ? (
                   <div className="flex items-center space-x-1">
@@ -50,7 +50,7 @@ export const ContactCard: React.FC<ContactCardProps> = ({
                 )}
               </div>
             </div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-3">{contact.name}</h3>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3">{contact.name}</h3>
           </div>
         </div>
 
@@ -58,7 +58,7 @@ export const ContactCard: React.FC<ContactCardProps> = ({
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <MessageCircle className="h-4 w-4 text-green-600" />
-              <span className="text-sm text-gray-700">{formatPhoneNumber(contact.whatsapp)}</span>
+              <span className="text-sm text-gray-700 dark:text-gray-300">{formatPhoneNumber(contact.whatsapp)}</span>
             </div>
             <button
               onClick={handleWhatsAppClick}
@@ -71,7 +71,7 @@ export const ContactCard: React.FC<ContactCardProps> = ({
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <Send className="h-4 w-4 text-blue-600" />
-              <span className="text-sm text-gray-700">@{contact.telegramId.replace('@', '')}</span>
+              <span className="text-sm text-gray-700 dark:text-gray-300">@{contact.telegramId.replace('@', '')}</span>
             </div>
             <button
               onClick={handleTelegramClick}
@@ -83,12 +83,12 @@ export const ContactCard: React.FC<ContactCardProps> = ({
         </div>
 
         {contact.notes && (
-          <div className="mb-4 p-3 bg-gray-50 rounded-lg border-l-4 border-blue-500">
+          <div className="mb-4 p-3 bg-gray-50 dark:bg-blue-950 rounded-lg border-l-4 border-blue-500">
             <div className="flex items-start space-x-2">
               <FileText className="h-4 w-4 text-blue-600 mt-0.5 flex-shrink-0" />
               <div>
                 <p className="text-xs font-medium text-blue-800 mb-1">Catatan:</p>
-                <p className="text-sm text-gray-700 leading-relaxed">{contact.notes}</p>
+                <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">{contact.notes}</p>
               </div>
             </div>
           </div>

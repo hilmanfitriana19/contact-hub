@@ -21,22 +21,24 @@ export const ContactListItem: React.FC<ContactListItemProps> = ({
   onDelete
 }) => {
   return (
-    <li className="flex justify-between items-start py-4">
+    <li className="flex justify-between items-start py-4 px-4 sm:px-6 rounded-md hover:bg-slate-100 dark:hover:bg-blue-900">
       <div>
-        <p className="font-medium text-gray-900">{contact.name}</p>
-        <p className="text-sm text-gray-600">{contact.organization}</p>
-        <p className="text-sm text-gray-700">
+        <p className="font-medium text-gray-900 dark:text-gray-100">{contact.name}</p>
+        <p className="text-sm text-gray-600 dark:text-gray-300">{contact.organization}</p>
+        <p className="text-sm text-gray-700 dark:text-gray-300">
           {formatPhoneNumber(contact.whatsapp)} |
           @{contact.telegramId.replace('@', '')}
         </p>
         {contact.notes && (
-          <p className="text-sm text-gray-500 mt-1">{contact.notes}</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{contact.notes}</p>
         )}
       </div>
       <div className="flex items-center space-x-2">
         <span
-          className={`flex items-center space-x-1 text-xs font-medium ${
-            contact.isActive ? 'text-green-600' : 'text-red-600'
+          className={`flex items-center space-x-1 text-xs font-medium px-2 py-0.5 rounded-full ${
+            contact.isActive
+              ? 'bg-green-50 text-green-700 dark:bg-green-700 dark:text-white'
+              : 'bg-red-50 text-red-700 dark:bg-red-700 dark:text-white'
           }`}
         >
           <span
