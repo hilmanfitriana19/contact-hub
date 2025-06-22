@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Shield, Lock } from 'lucide-react';
 
 const ADMIN_CODE = (import.meta.env.VITE_ADMIN_CODE as string) || 'admin123';
-const YEAR_CODE = (import.meta.env.VITE_YEAR_CODE as string) || new Date().getFullYear().toString();
+const USER_CODE = (import.meta.env.VITE_USER_CODE as string) || 'user123';
 
 interface AdminLoginProps {
   onLogin: (code: string) => boolean;
@@ -23,20 +23,20 @@ export const AdminLogin: React.FC<AdminLoginProps> = ({ onLogin }) => {
 
   return (
     <div className="max-w-md mx-auto mt-8">
-      <div className="bg-white rounded-lg shadow-md p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
         <div className="text-center mb-6">
           <div className="flex items-center justify-center space-x-2 mb-4">
             <Shield className="h-8 w-8 text-orange-600" />
-            <h2 className="text-2xl font-bold text-gray-900">Admin Login</h2>
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Admin Login</h2>
           </div>
-          <p className="text-gray-600">
+          <p className="text-gray-600 dark:text-gray-300">
             Masukkan kode admin untuk mengakses panel pengelolaan
           </p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="adminCode" className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="adminCode" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Kode Admin
             </label>
             <div className="relative">
@@ -50,8 +50,8 @@ export const AdminLogin: React.FC<AdminLoginProps> = ({ onLogin }) => {
                   setError('');
                 }}
                 className={`w-full pl-10 pr-4 py-2 border rounded-md focus:ring-2 focus:ring-orange-500 focus:border-orange-500 ${
-                  error ? 'border-red-500' : 'border-gray-300'
-                }`}
+                  error ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
+                } bg-white dark:bg-gray-700 dark:text-gray-100`}
                 placeholder="Masukkan kode admin"
                 required
               />
@@ -69,12 +69,12 @@ export const AdminLogin: React.FC<AdminLoginProps> = ({ onLogin }) => {
           </button>
         </form>
 
-        <div className="mt-4 p-3 bg-gray-50 rounded-md">
-          <p className="text-xs text-gray-600 text-center">
+        <div className="mt-4 p-3 bg-gray-50 dark:bg-gray-700 rounded-md">
+          <p className="text-xs text-gray-600 dark:text-gray-400 text-center">
             Demo: Gunakan kode <span className="font-mono font-bold">{ADMIN_CODE}</span>
           </p>
-          <p className="text-xs text-gray-600 text-center">
-            Kode Tahun: <span className="font-mono font-bold">{YEAR_CODE}</span>
+          <p className="text-xs text-gray-600 dark:text-gray-400 text-center">
+            Kode Akses: <span className="font-mono font-bold">{USER_CODE}</span>
           </p>
         </div>
       </div>

@@ -9,7 +9,7 @@ import { contactService } from './services/contactService';
 import { ContactFormData, AppState } from './types';
 
 const ADMIN_CODE = (import.meta.env.VITE_ADMIN_CODE as string) || 'admin123';
-const YEAR_CODE = (import.meta.env.VITE_YEAR_CODE as string) || new Date().getFullYear().toString();
+const USER_CODE = (import.meta.env.VITE_USER_CODE as string) || 'user123';
 
 function App() {
   const [state, setState] = useState<AppState>({
@@ -19,8 +19,23 @@ function App() {
     loading: false,
     currentView: 'public'
   });
+  const [darkMode, setDarkMode] = useState(() => {
+    const stored = localStorage.getItem('theme');
+    if (stored) return stored === 'dark';
+    return false;
+  });
 
   const hasFetched = useRef(false);
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    }
+  }, [darkMode]);
 
   const fetchContacts = async () => {
     setState(prev => ({ ...prev, loading: true }));
@@ -33,7 +48,7 @@ function App() {
   };
 
   const handleUserLogin = (code: string): boolean => {
-    if (code === YEAR_CODE) {
+    if (code === USER_CODE) {
       setState(prev => ({ ...prev, hasAccess: true }));
       fetchContacts();
       return true;
@@ -159,22 +174,24 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:text-gray-100">
       <Header
         currentView={state.currentView}
         isAdmin={state.isAdmin}
         onViewChange={handleViewChange}
         onAdminLogout={handleAdminLogout}
+        darkMode={darkMode}
+        onToggleDarkMode={() => setDarkMode(prev => !prev)}
       />
       
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {renderCurrentView()}
       </main>
       
-      <footer className="bg-white border-t border-gray-200 mt-12">
+      <footer className="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 mt-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="text-center text-gray-500 text-sm">
-            <p>&copy; {YEAR_CODE} ContactHub. Aplikasi Pencatatan Kontak & Relasi Kerja.</p>
+            <p>&copy; {new Date().getFullYear()} ContactHub. Aplikasi Pencatatan Kontak & Relasi Kerja.</p>
           </div>
         </div>
       </footer>
